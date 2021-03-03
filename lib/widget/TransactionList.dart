@@ -13,17 +13,18 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-        height: 400,
-        child:_userTransactions.isEmpty ? Column(
+        child:_userTransactions.isEmpty ? LayoutBuilder(builder: (context,constrains){
+          return Column(
             children: [
-                SizedBox(height: 10),
-                Text("No transaction yet!",style: Theme.of(context).textTheme.headline6),
-                Container(
-                    height: 200,
-                    margin: EdgeInsets.only(top: 20),
-                    child: Image.asset('assets/images/waiting.png',fit: BoxFit.cover))
-                ],
-        ) :ListView.builder(
+              SizedBox(height: 10),
+              Text("No transaction yet!",style: Theme.of(context).textTheme.headline6),
+              Container(
+                  height: constrains.maxHeight* 0.6,
+                  margin: EdgeInsets.only(top: 20),
+                  child: Image.asset('assets/images/waiting.png',fit: BoxFit.cover))
+            ],
+          );
+        }) :ListView.builder(
                 scrollDirection:Axis.vertical,
                 itemCount: _userTransactions.length,
                 itemBuilder: (ctx,index){
